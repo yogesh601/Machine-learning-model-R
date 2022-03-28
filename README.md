@@ -18,6 +18,7 @@ library(factoextra) # clustering algorithms & visualization
 library("xlsx") # importing the XLSX files
 library(MASS)
 library(caTools)
+```
 
 # Read the data file from the source (CSV or XLSX) file may be also imported in TXT format.
 mydata<- read.xlsx ("...Documents/......./file.xlsx", 1)
@@ -39,7 +40,7 @@ mydata_norm <- as.data.frame(lapply(mydata, min_max_norm))
 head(mydata_norm)
 
 
-#=============Generation correlation matrix======================
+# =============Generation correlation matrix======================
 # ensure the results are repeatable
 set.seed(100)
 # load the library
@@ -69,27 +70,27 @@ n <- neuralnet(Endvariable ~., data = trainingData,
                linear.output = F,
                lifesign = 'full',
                rep=1)
- ##===============================Naive Bayes============================================        
+## ===============================Naive Bayes============================================        
  library(naivebayes)
  model_NB <- naive_bayes(Endvariable ~ ., data = trainingData)
   
-##=================================SVM===============================================
+## =================================SVM===============================================
 library(e1071)
 svmfit = svm(Endvariable ~., data = trainingData, kernel = "linear", cost = 10, scale = FALSE)
   
-##============================Random Forest============================================
+## ============================Random Forest============================================
 library(mlbench)
 library(caret)
 library(randomForest)
 rf60 <- randomForest(Endvariable ~., data = trainingData, ntrees= 500, mtry = 6, importance=TRUE) 
 
-##===============================Decision Tree========================================
+## ===============================Decision Tree========================================
 
 library(rpart)
 library(rpart.plot)
 DT <- rpart (Endvariable ~., data = trainingData, method = 'class')
 
-##=========Predicting the different model results============================
+## =========Predicting the different model results============================
 glm.predict <- predict(glm.fit,testData, type = "response")
 glm.predict
 
@@ -107,15 +108,15 @@ RF.predict
 
 DT.predict <- predict(fit, testData, type = "class")
 DT.predict
-##==============================================================================
-##===========Calculating the ROC==========================================
+
+## ===========Calculating the ROC==========================================
 PRROC_glm <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,curve=TRUE)
 PRROC_SVM <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,curve=TRUE)
 PRROC_RF <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,curve=TRUE)
 PRROC_ANN <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,curve=TRUE)
 PRROC_DT <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,curve=TRUE)
 
-##================Section to visualize all the AUC ROC curve using Plot Function======================
+## ================Section to visualize all the AUC ROC curve using Plot Function======================
 
 plot(PRROC_glm, colorize = F, lwd = 2, type = "l", col = 1) + abline(coef = c(0,1), col = c("grey"),lwd = 2,lty = 2:3,main = "ROC") 
 plot(PRROC_SVM, col = 2, lty = 1, lwd = 2, type = "l", add = TRUE, print.auc.adj=c(0,2))
@@ -129,4 +130,4 @@ lwd=c(2,2),col=c('1','2','3','4','5'))
 
 # Enjoy the code and comment if you have any query.
 
-Thanks.
+## Thanks.
