@@ -1,10 +1,13 @@
 # Welcome to GitHub Desktop!
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+This project is for Machine Learning model development by using different methods.
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
 
+Yogesh Kumar
 ## Step 1: Code for Model development by using different algorithms. 
+
+# Install the packages (You will need these packages for further analysis)
+# Call all the libraries
 ```{r}
 library(tidyverse)  # data loading, manipulation and plotting
 library(carData)    # Salary dataset
@@ -17,7 +20,7 @@ library(MASS)
 library(caTools)
 
 # Read the data file from the source (CSV or XLSX) file may be also imported in TXT format.
-mydata<- read.xlsx ("Documents/......./file.xlsx", 1)
+mydata<- read.xlsx ("...Documents/......./file.xlsx", 1)
 
 #replace NA witth 0 if you have NA in your table
 
@@ -52,7 +55,7 @@ library(corrplot)
 correlations <- cor(mydata)
 corrplot(correlations, method="circle")
 
-## ========================GLM Lofistic regressio model fittig=====================
+## ========================GLM Logistic regression model fitting=====================
 set.seed(222)
 ind = sample.split(mydata, SplitRatio = .80)
 trainingData = subset(mydata, ind == TRUE)
@@ -112,7 +115,7 @@ PRROC_RF <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,cu
 PRROC_ANN <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,curve=TRUE)
 PRROC_DT <- roc.curve(scores.class0 = glm.probs,  weights.class0=testData$NAS,curve=TRUE)
 
-##================Section to visualize the all AUC ROC curve using Plot Function======================
+##================Section to visualize all the AUC ROC curve using Plot Function======================
 
 plot(PRROC_glm, colorize = F, lwd = 2, type = "l", col = 1) + abline(coef = c(0,1), col = c("grey"),lwd = 2,lty = 2:3,main = "ROC") 
 plot(PRROC_SVM, col = 2, lty = 1, lwd = 2, type = "l", add = TRUE, print.auc.adj=c(0,2))
